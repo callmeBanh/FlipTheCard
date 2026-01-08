@@ -362,8 +362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.47976, y: 2.45361}
-  m_SizeDelta: {x: 800, y: 315.74313}
+  m_AnchoredPosition: {x: 0.57, y: 2.29}
+  m_SizeDelta: {x: 753.1752, y: 295.4231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &640372689
 MonoBehaviour:
@@ -760,7 +760,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 697898129}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: LoadChooseLevel
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
