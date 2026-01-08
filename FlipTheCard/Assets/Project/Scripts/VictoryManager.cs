@@ -19,28 +19,37 @@ public class VictoryManager : MonoBehaviour
     public Image iconDisplay;
     public Text codeDisplay;
     public Text titleDisplay;
-    public void OnGameWin()
+
+    private bool isGiftOpened = false;
+    public void OnGameWin(GameObject clickedGift)
     {
-      if (database == null) {
+        if (database == null) 
+        {
         Debug.LogError("Chưa kéo Voucher Database vào!");
         return;
-    }
+        }
 
+        if (isGiftOpened) return; // Chặn mở quà nhiều lần
+        isGiftOpened = true;
     // 1. Lấy voucher ngẫu nhiên
-    Voucher reward = database.GetRandomVoucher();
+        Voucher reward = database.GetRandomVoucher();
 
-    // 2. Gán dữ liệu (Phải dùng .text cho các ô Text)
-    if (titleText != null) titleText.text = reward.title;
-    if (codeText != null) codeText.text = reward.code;
-    if (descriptionText != null) descriptionText.text = reward.description;
-    if (voucherImage != null) voucherImage.sprite = reward.icon;
+        // 2. Gán dữ liệu (Phải dùng .text cho các ô Text)
+        if (titleText != null) titleText.text = reward.title;
+        if (codeText != null) codeText.text = reward.code;
+        if (descriptionText != null) descriptionText.text = reward.description;
+        if (voucherImage != null) voucherImage.sprite = reward.icon;
 
-    // 3. Hiện Popup
-    if (rewardPopup != null) 
-    {
-        rewardPopup.SetActive(true);
-        Debug.Log("Đã hiện Panel Victory!");
-    }
+        // 3. Hiện Popup
+        if (rewardPopup != null) 
+        {
+            rewardPopup.SetActive(true);
+            Debug.Log("Đã hiện Panel Victory!");
+        }
+        if (clickedGift != null) 
+        {
+            clickedGift.SetActive(false);
+        }
     }
     
 
@@ -48,7 +57,11 @@ public class VictoryManager : MonoBehaviour
     {
         GUIUtility.systemCopyBuffer = codeText.text.Replace("CODE: ", "");
     }
-
+    public void ResetVictoryState()
+    {
+        isGiftOpened = false;
+        victoryPanel.SetActive(false);
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
