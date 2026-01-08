@@ -8,28 +8,32 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //Danh sách các nút bấm được sử dụng trong LevelManager
     public Button[] levelButtons;
+    public LevelDataGame[] levelsData; // Mảng dữ liệu các level
     void Start()
     {
         for (int i = 0; i < levelButtons.Length; i++)
         {
-           TextMeshProUGUI buttonText = levelButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            int index = i; // Tạo biến tạm để tránh lỗi closure trong AddListener
             
-            if (buttonText != null)
+            // Tự động gán số lên nút bấm từ Data
+            TextMeshProUGUI buttonText = levelButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null && i < levelsData.Length)
             {
-                // Đánh số bắt đầu từ 1 (i + 1)
-                buttonText.text = (i + 1).ToString();
+                buttonText.text = levelsData[i].levelId.ToString();
             }
 
-            int levelIndex = i + 1; 
-            levelButtons[i].onClick.AddListener(() => OnLevelSelected(levelIndex));
+            // Gán sự kiện chuyển Scene
+            levelButtons[i].onClick.AddListener(() => OnLevelSelected(levelsData[index]));
         }
     }
 
-    void OnLevelSelected(int levelIndex)
+    void OnLevelSelected(LevelDataGame data)
     {
-        Debug.Log("Level " + levelIndex + " selected.");
-        // // Tải cảnh tương ứng với cấp độ đã chọn
-        // SceneManager.LoadScene("Level" + levelIndex);
+        // Lưu số cặp bài và thời gian của màn đó vào bộ nhớ
+        PlayerPrefs.SetInt("PairCount", data.pairCount);
+        PlayerPrefs.SetFloat("TimeLimit", data.timeLimit);
+        
+        SceneManager.LoadScene("UserPlay");
     }
 
     // Update is called once per frame
