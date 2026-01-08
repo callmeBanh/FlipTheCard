@@ -9,7 +9,7 @@ public class VictoryManager : MonoBehaviour
     public Text codeText;
     public Text descriptionText;
     public Image voucherImage;
-    public GameObject viectoryPanel;
+    public GameObject victoryPanel;
 
     [Header("Data")]
     public VoucherDatabase database;
