@@ -3,14 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    public void LoadStartGame()
+    {
+        SceneManager.LoadScene("StartGame");
+    }
     public void LoadChooseLevel()
     {
         SceneManager.LoadScene("ChooseLevel");
     }
 
-    public void LoadStartGame()
+    public void LoadUserPlay()
     {
-        SceneManager.LoadScene("StartGame");
+        Debug.Log("Đang vào màn chơi: UserPlay");
+        SceneManager.LoadScene("UserPlay"); 
+    }
+    public void ReplayGame()
+    {
+        SceneManager.LoadScene("UserPlay");
+
+        
+        Debug.Log("Đang tải lại màn chơi...");
     }
     public void QuitGame()
     {
