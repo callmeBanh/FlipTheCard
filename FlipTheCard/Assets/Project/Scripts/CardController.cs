@@ -9,7 +9,7 @@ public class CardController : MonoBehaviour
 {
     // code cho từng màng
     [SerializeField] private LevelDataGame[] levels;
-    [SerializeField] private int currentLevel = 1;
+     public static int currentLevel = 0;
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Transform gridTrasform;
     [SerializeField] private Sprite[] sprites;

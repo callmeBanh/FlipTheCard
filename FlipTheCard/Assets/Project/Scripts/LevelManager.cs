@@ -13,27 +13,28 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < levelButtons.Length; i++)
         {
-            int index = i; // Tạo biến tạm để tránh lỗi closure trong AddListener
+           
+
+           int levelIndex = i;
+           TextMeshProUGUI buttonText = levelButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             
-            // Tự động gán số lên nút bấm từ Data
-            TextMeshProUGUI buttonText = levelButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null && i < levelsData.Length)
+            if (buttonText != null)
             {
-                buttonText.text = levelsData[i].levelId.ToString();
+                // Đánh số bắt đầu từ 1 (i + 1)
+                buttonText.text = (i + 1).ToString();
             }
 
-            // Gán sự kiện chuyển Scene
-            levelButtons[i].onClick.AddListener(() => OnLevelSelected(levelsData[index]));
+            
+            levelButtons[i].onClick.AddListener(() => OnLevelSelected(levelIndex));
         }
     }
 
     void OnLevelSelected(LevelDataGame data)
     {
-        // Lưu số cặp bài và thời gian của màn đó vào bộ nhớ
-        PlayerPrefs.SetInt("PairCount", data.pairCount);
-        PlayerPrefs.SetFloat("TimeLimit", data.timeLimit);
-        
-        SceneManager.LoadScene("UserPlay");
+        Debug.Log("Level " + levelIndex + " selected.");
+        // // Tải cảnh tương ứng với cấp độ đã chọn
+       CardController.currentLevel = levelIndex;
+         SceneManager.LoadScene("UserPlay");
     }
 
     // Update is called once per frame
