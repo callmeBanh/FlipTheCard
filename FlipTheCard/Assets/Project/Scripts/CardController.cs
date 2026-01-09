@@ -35,14 +35,18 @@ public class CardController : MonoBehaviour
     private void Start()
     {
             // Kiểm tra xem danh sách levels có trống không và index có hợp lệ không
-        if (levels != null && currentLevel >= 0 && currentLevel < levels.Length)
+        if (levels != null && currentLevel < levels.Length)
         {
             LevelDataGame levelData = levels[currentLevel];
             timePlaying = levelData.timeLimit;
-            PrepareSprites(levelData.pairCount);
-            CreateCard();
-            audioSource = GetComponent<AudioSource>();
-            gameIsPlaying = true;
+            if(levelData.pairCount > 0)
+            {
+                PrepareSprites(levelData.pairCount);
+                CreateCard();
+                audioSource = GetComponent<AudioSource>();
+                gameIsPlaying = true;
+                Debug.Log($"Bắt đầu màn {currentLevel + 1} với {levelData.pairCount} cặp bài.");
+            }
         }
         else
         {

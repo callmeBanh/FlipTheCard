@@ -940,7 +940,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 333432903}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: LoadUserPlay
+        m_MethodName: LoadNextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1156,7 +1156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 330}
+  m_AnchoredPosition: {x: -10.34, y: 330}
   m_SizeDelta: {x: 484.7, y: 124.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926528251
@@ -1183,22 +1183,22 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8deabb4595a6ba14dafb645a1e33554a, type: 2}
+  m_sharedMaterial: {fileID: 6460147731925299312, guid: 8deabb4595a6ba14dafb645a1e33554a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280953509
-  m_fontColor: {r: 0.6470588, g: 0.1647059, b: 0.1647059, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
+    rgba: 4290013695
+  m_fontColor: {r: 1, g: 0.4117647, b: 0.7058824, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 1, g: 0.7137255, b: 0.75686276, a: 1}
+    topRight: {r: 1, g: 0.7137255, b: 0.75686276, a: 1}
+    bottomLeft: {r: 0.8156863, g: 0.1254902, b: 0.5647059, a: 1}
+    bottomRight: {r: 0.8156863, g: 0.1254902, b: 0.5647059, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -1208,8 +1208,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 110
+  m_fontSizeBase: 110
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
