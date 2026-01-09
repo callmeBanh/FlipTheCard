@@ -8,10 +8,16 @@ public class LevelManager : MonoBehaviour
     public Button[] levelButtons;
     public LevelDataGame[] levelsData; 
 
+    // Biến static này sẽ tự reset về 0 mỗi khi tắt game
+    public static int HighestLevelReached = 0;
+
     void Start()
     {
-        // 1. Lấy dữ liệu màn chơi cao nhất đã đạt được từ máy (Mặc định là 0 - tức là Level 1)
-        int levelReached = PlayerPrefs.GetInt("LevelReached", 0);
+        // KHÔNG DÙNG PlayerPrefs NỮA
+        // int levelReached = PlayerPrefs.GetInt("LevelReached", 0);
+        
+        // DÙNG BIẾN STATIC
+        int levelReached = HighestLevelReached;
 
         for (int i = 0; i < levelButtons.Length; i++)
         {
@@ -23,34 +29,21 @@ public class LevelManager : MonoBehaviour
                 buttonText.text = (i + 1).ToString();
             }
 
-            // --- PHẦN SỬA ĐỔI: LOGIC KHÓA/MỞ LEVEL ---
-            
-            // Tìm icon ổ khóa trong nút (bạn phải đặt tên Gameobject con là "LockIcon")
             Transform lockIcon = levelButtons[i].transform.Find("LockIcon");
 
+            // So sánh với biến static
             if (i > levelReached)
             {
-                // TRƯỜNG HỢP BỊ KHÓA (Index của nút lớn hơn cấp độ đã đạt được)
-                levelButtons[i].interactable = false; // Không cho bấm
-                
-                // Ẩn số đi cho đẹp (tùy chọn)
+                levelButtons[i].interactable = false; 
                 if (buttonText != null) buttonText.gameObject.SetActive(false);
-
-                // Hiện ổ khóa
                 if (lockIcon != null) lockIcon.gameObject.SetActive(true);
             }
             else
             {
-                // TRƯỜNG HỢP ĐƯỢC MỞ
-                levelButtons[i].interactable = true; // Cho phép bấm
-                
-                // Hiện số
+                levelButtons[i].interactable = true; 
                 if (buttonText != null) buttonText.gameObject.SetActive(true);
-
-                // Ẩn ổ khóa
                 if (lockIcon != null) lockIcon.gameObject.SetActive(false);
             }
-            // ------------------------------------------
 
             levelButtons[i].onClick.AddListener(() => OnLevelSelected(levelIndex));
         }

@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Thêm thư viện này để quản lý Scene
 
 public class ButtonManager : MonoBehaviour
 {
@@ -10,8 +10,6 @@ public class ButtonManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton - 1 class khai báo duy nhất dung chung cho tất cả
-
         if (Instance == null)
         {
             Instance = this;
@@ -19,10 +17,27 @@ public class ButtonManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Hủy bản sao thừa nếu quay lại màn Start
         }
     }
 
+    // --- PHẦN MỚI: Tự động đồng bộ âm thanh khi chuyển cảnh ---
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Mỗi khi vào màn mới, áp dụng lại cài đặt âm thanh hiện tại
+        ApplySoundSetting();
+    }
+    // ----------------------------------------------------------
 
     public void PauseGame()
     {
@@ -36,28 +51,40 @@ public class ButtonManager : MonoBehaviour
         isPaused = false;
     }
 
-    // ================= SOUND =================
     public void ToggleSound()
     {
+        Debug.Log("Đã bấm nút tắt nhạc!"); // <--- THÊM DÒNG NÀY
+        
         isSoundOn = !isSoundOn;
-       if (isSoundOn)
+        if (isSoundOn)
+        {
+            AudioListener.volume = 1f; // Mở âm thanh toàn cầu
+        }
+        else
+        {
+            AudioListener.volume = 0f; // Tắt âm thanh toàn cầu
+        }
+    }
+
+    // Tách hàm xử lý âm thanh ra riêng để tái sử dụng
+    private void ApplySoundSetting()
+    {
+        if (isSoundOn)
         {
             AudioListener.volume = 1f;
-           
         }
         else
         {
             AudioListener.volume = 0f;
-          
         }
 
-        if(AudiosManager.Instance != null)
+        // Gọi sang AudiosManager nếu có
+        if (AudiosManager.Instance != null)
         {
             AudiosManager.Instance.ToggleMusic(isSoundOn);
         }
     }
 
-    // (Optional) để scene khác kiểm tra trạng thái
     public bool IsPaused() => isPaused;
     public bool IsSoundOn() => isSoundOn;
 }
