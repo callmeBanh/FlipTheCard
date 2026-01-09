@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class CardController : MonoBehaviour
 {
-    // code cho từng màng
+    // ... Khai báo biến giữ nguyên ...
     [SerializeField] private LevelDataGame[] levels;
-     public static int currentLevel = 0;
+    public static int currentLevel = 0;
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Transform gridTrasform;
     [SerializeField] private Sprite[] sprites;
@@ -28,13 +28,10 @@ public class CardController : MonoBehaviour
     // am thanh
     private AudioSource audioSource;
     public AudioClip flipSound;
-  
-    
-
 
     private void Start()
     {
-            // Kiểm tra xem danh sách levels có trống không và index có hợp lệ không
+        // ... (Code Start giữ nguyên) ...
         if (levels != null && currentLevel < levels.Length)
         {
             LevelDataGame levelData = levels[currentLevel];
@@ -50,14 +47,14 @@ public class CardController : MonoBehaviour
         }
         else
         {
-            // Thông báo lỗi cụ thể ra Console để dễ sửa
-            Debug.LogError($"Lỗi: Index {currentLevel} không tồn tại trong danh sách Levels (Size hiện tại là {levels?.Length ?? 0})");
+            Debug.LogError($"Lỗi: Index {currentLevel} không tồn tại.");
             gameIsPlaying = false; 
         }
     }
 
     void Update()
     {
+        // ... (Code Update giữ nguyên) ...
         if(gameIsPlaying)
         {
             timePlaying -= Time.deltaTime;
@@ -69,12 +66,14 @@ public class CardController : MonoBehaviour
         }
     } 
 
+    // ... (Các hàm timeOut, updateTimeUI, PrepareSprites, CreateCard giữ nguyên) ...
     void timeOut()
     {
         gameIsPlaying = false;
         timePlaying = 0;
         updateTimeUI();
         Debug.Log("Time Up! You Lose!");
+        // Có thể load Scene thua tại đây
     }  
 
     void updateTimeUI()
@@ -86,13 +85,10 @@ public class CardController : MonoBehaviour
     private void PrepareSprites(int pairNeed)
     {
         spritePairs = new List<Sprite>();
-
-        // trộn danh sách tất cả các ảnh
         List<Sprite> tempPool = new List<Sprite>(sprites);
         Shuffle(tempPool);
         for (int i = 0; i < pairNeed; i++)
         {
-            // add each sprite twice to create pairs
             spritePairs.Add(tempPool[i]);
             spritePairs.Add(tempPool[i]);
         }
@@ -106,16 +102,13 @@ public class CardController : MonoBehaviour
             Card newCard = Instantiate(cardPrefab, gridTrasform);
             newCard.SetIconSprite(spritePairs[i]);
             newCard.cardController = this;
-            
         }
     }
 
     public void SetSelectedCard(Card selectedCard)
     {
-        if(!gameIsPlaying || Time.timeScale == 0)
-        {
-            return;
-        }
+        // ... (Code SetSelectedCard giữ nguyên) ...
+        if(!gameIsPlaying || Time.timeScale == 0) return;
 
         if(selectedCard.isSelected == false)
         {
@@ -131,11 +124,13 @@ public class CardController : MonoBehaviour
                 SecondSelected = selectedCard;
                 StartCoroutine(CheckMatch(firstSelected, SecondSelected));
                 audioSource.PlayOneShot(flipSound);
+                
+                // Lưu ý: Code gốc của bạn reset null ở đây là HƠI RỦI RO, 
+                // nhưng nếu code cũ chạy ổn thì tôi giữ nguyên logic của bạn.
                 firstSelected = null;
                 SecondSelected = null;
             }
         }
-       
     }
 
     IEnumerator CheckMatch(Card a , Card b)
@@ -143,15 +138,18 @@ public class CardController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if(a.IconSprite == b.IconSprite)
         {
-            // it's a match, keep them shown 
             matchCounts++;
             if(matchCounts >= spritePairs.Count / 2)
             {
                 Debug.Log("You Win!");
                 gameIsPlaying = false;
+
+                // --- PHẦN THÊM MỚI: MỞ KHÓA LEVEL TIẾP THEO ---
+                UnlockNextLevel();
+                // ----------------------------------------------
+
                 SceneManager.LoadScene("Result");
             }
-
         }
         else
         {
@@ -160,17 +158,31 @@ public class CardController : MonoBehaviour
         }
     }
 
+    // --- HÀM MỚI ĐỂ LƯU TIẾN ĐỘ ---
+    void UnlockNextLevel()
+    {
+        // Lấy cấp độ cao nhất hiện tại đang lưu trong máy
+        int levelReached = PlayerPrefs.GetInt("LevelReached", 0);
+
+        // Nếu màn chơi hiện tại (currentLevel) là màn cao nhất người chơi từng chơi
+        // Ví dụ: Đang ở Level 0, LevelReached là 0 -> Thắng -> Lưu LevelReached lên 1
+        if (currentLevel >= levelReached)
+        {
+            PlayerPrefs.SetInt("LevelReached", currentLevel + 1);
+            PlayerPrefs.Save(); // Lưu xuống ổ cứng ngay lập tức
+            Debug.Log("Đã mở khóa Level " + (currentLevel + 2)); // +2 vì log cho con người đọc (bắt đầu từ 1)
+        }
+    }
+    // -----------------------------
+
     void Shuffle(List<Sprite> list)
     {
-    for (int i = 0; i < list.Count; i++)
-    {
-        int rnd = Random.Range(i, list.Count);
-        Sprite temp = list[i];
-        list[i] = list[rnd];
-        list[rnd] = temp;
-    }
+        for (int i = 0; i < list.Count; i++)
+        {
+            int rnd = Random.Range(i, list.Count);
+            Sprite temp = list[i];
+            list[i] = list[rnd];
+            list[rnd] = temp;
+        }
     }
 }
-
-
-

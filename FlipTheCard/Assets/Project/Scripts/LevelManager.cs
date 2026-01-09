@@ -1,30 +1,57 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;// thư viện điều khiểm TextMeshPro
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //Danh sách các nút bấm được sử dụng trong LevelManager
     public Button[] levelButtons;
-    public LevelDataGame[] levelsData; // Mảng dữ liệu các level
+    public LevelDataGame[] levelsData; 
+
     void Start()
     {
+        // 1. Lấy dữ liệu màn chơi cao nhất đã đạt được từ máy (Mặc định là 0 - tức là Level 1)
+        int levelReached = PlayerPrefs.GetInt("LevelReached", 0);
+
         for (int i = 0; i < levelButtons.Length; i++)
         {
-           
+            int levelIndex = i;
+            TextMeshProUGUI buttonText = levelButtons[i].GetComponentInChildren<TextMeshProUGUI>();
 
-           int levelIndex = i;
-           TextMeshProUGUI buttonText = levelButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-            
             if (buttonText != null)
             {
-                // Đánh số bắt đầu từ 1 (i + 1)
                 buttonText.text = (i + 1).ToString();
             }
 
+            // --- PHẦN SỬA ĐỔI: LOGIC KHÓA/MỞ LEVEL ---
             
+            // Tìm icon ổ khóa trong nút (bạn phải đặt tên Gameobject con là "LockIcon")
+            Transform lockIcon = levelButtons[i].transform.Find("LockIcon");
+
+            if (i > levelReached)
+            {
+                // TRƯỜNG HỢP BỊ KHÓA (Index của nút lớn hơn cấp độ đã đạt được)
+                levelButtons[i].interactable = false; // Không cho bấm
+                
+                // Ẩn số đi cho đẹp (tùy chọn)
+                if (buttonText != null) buttonText.gameObject.SetActive(false);
+
+                // Hiện ổ khóa
+                if (lockIcon != null) lockIcon.gameObject.SetActive(true);
+            }
+            else
+            {
+                // TRƯỜNG HỢP ĐƯỢC MỞ
+                levelButtons[i].interactable = true; // Cho phép bấm
+                
+                // Hiện số
+                if (buttonText != null) buttonText.gameObject.SetActive(true);
+
+                // Ẩn ổ khóa
+                if (lockIcon != null) lockIcon.gameObject.SetActive(false);
+            }
+            // ------------------------------------------
+
             levelButtons[i].onClick.AddListener(() => OnLevelSelected(levelIndex));
         }
     }
@@ -32,35 +59,9 @@ public class LevelManager : MonoBehaviour
     void OnLevelSelected(int levelIndex)
     {
         Debug.Log("Level " + levelIndex + " selected.");
-        // // Tải cảnh tương ứng với cấp độ đã chọn
-       CardController.currentLevel = levelIndex;
-         SceneManager.LoadScene("UserPlay");
+        CardController.currentLevel = levelIndex;
+        SceneManager.LoadScene("UserPlay");
     }
 
-    void LoadNextLevel()
-    {
-        // Tính chỉ số màn tiếp theo (currentLevel bắt đầu từ 0)
-        int nextLevelIndex = CardController.currentLevel + 1;
-
-        // Kiểm tra xem màn tiếp theo có tồn tại trong dữ liệu không
-        if (nextLevelIndex < levelsData.Length)
-        {
-            // Cập nhật cấp độ hiện tại sang màn mới
-            CardController.currentLevel = nextLevelIndex;
-            
-            // Chuyển đến Scene chơi game
-            SceneManager.LoadScene("UserPlay");
-        }
-        else
-        {
-            Debug.Log("Chúc mừng! Bạn đã hoàn thành tất cả các màn chơi.");
-            // Có thể chuyển về Scene Menu chính tại đây
-            SceneManager.LoadScene("ChooseLevel");
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // ... (Phần LoadNextLevel và Update giữ nguyên hoặc xóa nếu không dùng ở đây)
 }
