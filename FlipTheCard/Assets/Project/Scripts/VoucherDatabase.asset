@@ -16,20 +16,20 @@ MonoBehaviour:
   - title: VoucherSilver
     code: FLIP10k
     description: "Gi\u1EA3m 10.000\u0111 cho m\u1ECDi h\xF3a \u0111\u01A1n"
-    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    icon: {fileID: 21300000, guid: 559f16253b58e84429886b82daed98c9, type: 3}
     rarity: Common
   - title: VoucherGold
     code: FREECOFFEE
     description: "T\u1EB7ng 1 ly Cafe mi\u1EC5n ph\xED"
-    icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    icon: {fileID: 21300000, guid: e94f710ef5c99d2448bf1ffe670d78fa, type: 3}
     rarity: Rare
   - title: VoucherDiamond
     code: BIGGIFTT50
     description: "Gi\u1EA3m 50% t\u1ED5ng h\xF3a \u0111\u01A1n(T\u1ED1i \u0111a 200k)"
-    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    icon: {fileID: 21300000, guid: 46d6ad2ff58adf641bfdeaf978f67d29, type: 3}
     rarity: Epic
   - title: VoucherBronze
     code: FREESHIP
     description: "Free ship cho m\u1ECDi \u0111\u01A1n h\xE0ng"
-    icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    icon: {fileID: 21300000, guid: 21c8b27ea9455e14e9e9b205dc9c0bcf, type: 3}
     rarity: Common
