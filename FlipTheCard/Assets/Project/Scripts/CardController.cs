@@ -28,7 +28,7 @@ public class CardController : MonoBehaviour
     // am thanh
     private AudioSource audioSource;
     public AudioClip flipSound;
-    public AudioClip winSound;
+  
     
 
 
@@ -112,7 +112,7 @@ public class CardController : MonoBehaviour
 
     public void SetSelectedCard(Card selectedCard)
     {
-        if(!gameIsPlaying)
+        if(!gameIsPlaying || Time.timeScale == 0)
         {
             return;
         }
