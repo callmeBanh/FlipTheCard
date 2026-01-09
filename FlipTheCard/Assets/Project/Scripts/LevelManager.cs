@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //Danh sách các nút bấm được sử dụng trong LevelManager
     public Button[] levelButtons;
+    public LevelDataGame[] levelsData; // Mảng dữ liệu các level
     void Start()
     {
         for (int i = 0; i < levelButtons.Length; i++)
