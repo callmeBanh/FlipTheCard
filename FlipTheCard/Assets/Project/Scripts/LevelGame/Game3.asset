@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Game3
   m_EditorClassIdentifier: Assembly-CSharp::LevelDataGame
   levelId: 3
-  timeLimit: 40
-  pairCount: 12
+  timeLimit: 100
+  pairCount: 8
