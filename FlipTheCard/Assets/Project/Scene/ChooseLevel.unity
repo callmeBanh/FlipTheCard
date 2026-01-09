@@ -596,19 +596,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 219318187}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &219318187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,7 +2305,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f964fd113842d445ac96022c48f8f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  levelButtons: []
+  levelButtons:
+  - {fileID: 219318186}
+  - {fileID: 1903142939}
+  - {fileID: 1190641757}
+  - {fileID: 2070973410}
+  - {fileID: 1551969343}
+  - {fileID: 588114909}
+  - {fileID: 1324778130}
+  - {fileID: 1248673734}
+  - {fileID: 904525934}
+  - {fileID: 206140794}
+  - {fileID: 972133983}
+  - {fileID: 1909870158}
 --- !u!114 &936379075
 MonoBehaviour:
   m_ObjectHideFlags: 0
