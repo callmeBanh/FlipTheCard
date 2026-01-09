@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void OnLevelSelected(LevelDataGame data)
+    void OnLevelSelected(int levelIndex)
     {
         Debug.Log("Level " + levelIndex + " selected.");
         // // Tải cảnh tương ứng với cấp độ đã chọn
