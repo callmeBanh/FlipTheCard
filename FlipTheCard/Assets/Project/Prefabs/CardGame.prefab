@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8622259438476403829, guid: 54f07f7c6fcdf4646832a395e01a32bd, type: 3}
+  m_Sprite: {fileID: 4914955215346226110, guid: ffce68654f0787c478860f5d4ad81a30, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   image: {fileID: 983901117247343827}
-  hiddenIconSprite: {fileID: -8622259438476403829, guid: 54f07f7c6fcdf4646832a395e01a32bd, type: 3}
+  hiddenIconSprite: {fileID: 4914955215346226110, guid: ffce68654f0787c478860f5d4ad81a30, type: 3}
   IconSprite: {fileID: 0}
   isSelected: 0
   cardController: {fileID: 0}
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8622259438476403829, guid: 54f07f7c6fcdf4646832a395e01a32bd, type: 3}
+  m_Sprite: {fileID: 4914955215346226110, guid: ffce68654f0787c478860f5d4ad81a30, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
