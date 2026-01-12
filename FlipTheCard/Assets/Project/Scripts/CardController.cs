@@ -108,7 +108,7 @@ public class CardController : MonoBehaviour
 
     public void SetSelectedCard(Card selectedCard)
     {
-        // ... (Code SetSelectedCard giữ nguyên) ...
+        
         if(!gameIsPlaying || Time.timeScale == 0) return;
 
         if(selectedCard.isSelected == false)
@@ -117,17 +117,22 @@ public class CardController : MonoBehaviour
             if(firstSelected == null)
             {
                 firstSelected = selectedCard;
+                if (AudiosManager.Instance != null && AudiosManager.Instance.isSoundOn)
+            {
                 audioSource.PlayOneShot(flipSound);
+            }
                 return;
             }
             if(SecondSelected == null)
             {
                 SecondSelected = selectedCard;
                 StartCoroutine(CheckMatch(firstSelected, SecondSelected));
+                if (AudiosManager.Instance != null && AudiosManager.Instance.isSoundOn)
+            {
                 audioSource.PlayOneShot(flipSound);
+            }
                 
-                // Lưu ý: Code gốc của bạn reset null ở đây là HƠI RỦI RO, 
-                // nhưng nếu code cũ chạy ổn thì tôi giữ nguyên logic của bạn.
+               
                 firstSelected = null;
                 SecondSelected = null;
             }
