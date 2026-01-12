@@ -74,6 +74,7 @@ public class CardController : MonoBehaviour
         updateTimeUI();
         Debug.Log("Time Up! You Lose!");
         // Có thể load Scene thua tại đây
+        SceneManager.LoadScene("Result_Fall");
     }  
 
     void updateTimeUI()
@@ -161,16 +162,18 @@ public class CardController : MonoBehaviour
     // --- HÀM MỚI ĐỂ LƯU TIẾN ĐỘ ---
     void UnlockNextLevel()
     {
-        // Lấy cấp độ cao nhất hiện tại đang lưu trong máy
-        int levelReached = PlayerPrefs.GetInt("LevelReached", 0);
+        // Lấy level cao nhất từ biến static bên LevelManager
+        int levelReached = LevelManager.HighestLevelReached;
 
-        // Nếu màn chơi hiện tại (currentLevel) là màn cao nhất người chơi từng chơi
-        // Ví dụ: Đang ở Level 0, LevelReached là 0 -> Thắng -> Lưu LevelReached lên 1
+        // Nếu màn hiện tại là màn cao nhất đang chơi
         if (currentLevel >= levelReached)
         {
-            PlayerPrefs.SetInt("LevelReached", currentLevel + 1);
-            PlayerPrefs.Save(); // Lưu xuống ổ cứng ngay lập tức
-            Debug.Log("Đã mở khóa Level " + (currentLevel + 2)); // +2 vì log cho con người đọc (bắt đầu từ 1)
+            // Cập nhật trực tiếp vào biến RAM (tự mất khi tắt game)
+            LevelManager.HighestLevelReached = currentLevel + 1;
+            
+            Debug.Log("Đã mở khóa tạm thời Level " + (currentLevel + 2));
+            
+            // QUAN TRỌNG: Xóa dòng PlayerPrefs.Save() đi nếu có
         }
     }
     // -----------------------------
