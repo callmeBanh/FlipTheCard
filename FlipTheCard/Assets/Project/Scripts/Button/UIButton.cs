@@ -3,7 +3,7 @@ using UnityEngine.UI; // Bắt buộc có để chỉnh sửa hình ảnh Button
 
 public class UIButton : MonoBehaviour
 {
-    [Header("Cài đặt Âm thanh (Chỉ dành cho nút Sound)")]
+
     [SerializeField] private Image buttonIcon; // Kéo cái Image của nút vào đây
     [SerializeField] private Sprite soundOnSprite;  // Hình loa đang bật
     [SerializeField] private Sprite soundOffSprite; // Hình loa đang tắt

@@ -3,29 +3,34 @@ using UnityEngine;
 public class AudiosManager : MonoBehaviour
 {
     public static AudiosManager Instance;
-    private AudioSource audioSource;
+
+    [SerializeField] private AudioSource bgmSource; 
+    public bool isSoundOn = true; 
 
     private void Awake()
     {
-        // Singleton
+        // --- ĐOẠN CODE QUAN TRỌNG ĐỂ GIỮ NHẠC ---
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            audioSource = GetComponent<AudioSource>();
-            audioSource.loop = true;
-            audioSource.playOnAwake = true;
-            audioSource.Play();
+            // Giữ đối tượng này tồn tại xuyên suốt các Scene
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
-            Destroy(gameObject);
+            // Nếu đã có một Manager từ Scene trước rồi, thì xóa cái mới này đi
+            Destroy(gameObject); 
+            return;
         }
+        // ----------------------------------------
     }
 
-    public void ToggleMusic(bool isOn)
+    public void ToggleMusic(bool status)
     {
-        audioSource.mute = !isOn;
+        isSoundOn = status;
+        if (bgmSource != null)
+        {
+            bgmSource.mute = !isSoundOn;
+        }
     }
 }
