@@ -74,6 +74,7 @@ public class CardController : MonoBehaviour
         updateTimeUI();
         Debug.Log("Time Up! You Lose!");
         // Có thể load Scene thua tại đây
+        
     }  
 
     void updateTimeUI()
