@@ -5,16 +5,19 @@ public class MenuController : MonoBehaviour
 {
     public void LoadChooseLevel()
     {
+      
         SceneManager.LoadScene("ChooseLevel");
     }
 
     public void LoadUserPlay()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("UserPlay");
     }
 
     public void ReplayGame()
     {
+        
         SceneManager.LoadScene("UserPlay");
 
         
@@ -22,7 +25,9 @@ public class MenuController : MonoBehaviour
     }
 
     public void LoadStartGame()
+    
     {
+       
         SceneManager.LoadScene("StartGame");
     }
 
@@ -32,16 +37,19 @@ public class MenuController : MonoBehaviour
         // Kiểm tra xem có vượt quá số lượng màn chơi bạn có không (vd: 12 màn)
         if (CardController.currentLevel < 12) 
         {
+           
             SceneManager.LoadScene("UserPlay"); // Load lại chính Scene chơi game
         }
         else
         {
+            
             Debug.Log("Hết màn rồi!");
             SceneManager.LoadScene("ChooseLevel"); // Quay về màn chọn level
         }
     }
     public void QuitGame()
     {
+    
         Debug.Log("Đang thoát game..."); 
         Application.Quit();
 
@@ -49,4 +57,6 @@ public class MenuController : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
+
+    
 }
