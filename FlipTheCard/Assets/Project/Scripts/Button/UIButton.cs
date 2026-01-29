@@ -3,69 +3,36 @@ using UnityEngine.UI; // Bắt buộc có để chỉnh sửa hình ảnh Button
 
 public class UIButton : MonoBehaviour
 {
-
-    [SerializeField] private Image buttonIcon; // Kéo cái Image của nút vào đây
-    [SerializeField] private Sprite soundOnSprite;  // Hình loa đang bật
-    [SerializeField] private Sprite soundOffSprite; // Hình loa đang tắt
-
-    private bool isSoundOn = true; // Biến theo dõi trạng thái hiện tại
-
-    private void Start()
+     public void OnToggleSound()
     {
-        // Khi game bắt đầu, kiểm tra xem nhạc đang bật hay tắt để hiện hình đúng
-        if (AudiosManager.Instance != null)
+        if (ButtonManager.Instance == null)
         {
-            // Lấy trạng thái từ AudioSource của Manager (nếu truy cập được)
-            // Hoặc mặc định là true nếu game mới vào
-            UpdateSoundIcon();
+            Debug.LogError("ButtonManager.Instance == null");
+            return;
         }
+
+        ButtonManager.Instance.ToggleSound();
     }
 
-    public void OnPause()
+    public void OnPauseGame()
     {
-        // Kiểm tra xem Time có đang chạy không để Pause
-        if (Time.timeScale > 0)
+        if (ButtonManager.Instance == null)
         {
-            Time.timeScale = 0; // Dừng game
-            // Nếu bạn có Panel Pause, hãy code bật nó lên ở đây
-            Debug.Log("Game Paused");
+            Debug.LogError("ButtonManager.Instance == null");
+            return;
         }
+
+        ButtonManager.Instance.PauseGame();
     }
 
-    public void OnResume()
+    public void OnResumeGame()
     {
-        Time.timeScale = 1; // Chạy tiếp game
-        Debug.Log("Game Resumed");
-    }
-
-    public void OnToggleSound()
-    {
-        // QUAN TRỌNG: Gọi trực tiếp AudiosManager.Instance để tránh lỗi Null
-        if (AudiosManager.Instance != null)
+        if (ButtonManager.Instance == null)
         {
-            isSoundOn = !isSoundOn; // Đảo ngược trạng thái (Bật -> Tắt, Tắt -> Bật)
-
-            // Gọi hàm bên AudiosManager để thực sự tắt/bật tiếng
-            AudiosManager.Instance.ToggleMusic(isSoundOn);
-
-            // Đổi hình ảnh nút
-            UpdateSoundIcon();
+            Debug.LogError("ButtonManager.Instance == null");
+            return;
         }
-    }
 
-    // Hàm phụ để đổi hình ảnh
-    void UpdateSoundIcon()
-    {
-        if (buttonIcon != null && soundOnSprite != null && soundOffSprite != null)
-        {
-            if (isSoundOn)
-            {
-                buttonIcon.sprite = soundOnSprite;
-            }
-            else
-            {
-                buttonIcon.sprite = soundOffSprite;
-            }
-        }
+        ButtonManager.Instance.ResumeGame();
     }
 }
