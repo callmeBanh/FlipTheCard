@@ -4421,14 +4421,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.72327036, g: 0.72327036, b: 0.72327036, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5913843372241848402, guid: 6d584329a7e4f4347a6f44bc3f6a17d2, type: 3}
+  m_Sprite: {fileID: -9055321370761056221, guid: db1e67036fc801d419ec8296b4be0259, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
